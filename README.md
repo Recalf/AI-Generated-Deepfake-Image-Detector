@@ -3,7 +3,7 @@ Detects if an image is Real or AI-Generated / DeepFake, using ConvNeXtV2_Base (p
 It detects many SOTA generative models too like Nano Banana Pro, DALL-E3, Flux, Diffusion Models (SDXL, SD3...), MidjourneyV6...
 <br>
 I used 2 phases for training, <br><br>
-phase 1: training my model on 400k from 11 datasets, using AdamW(wd 0.02)/ LLRD(headlr: 2e-4, lr_decay:0.8)/cosine annealing with warmup(linearLR)<br><br>
+phase 1: 400k images from 11 datasets using AdamW(wd 0.02)/ LLRD(headlr: 2e-4, lr_decay:0.8)/cosine annealing with warmup(linearLR)<br><br>
 phase 2: Continual Learning, using Rehearsal Buffer (Replay 1:1) and AdamW(wd 0.01)/ LLRD(headlr: 1e-4, lr_decay:0.8)/cosine annealing with warmup(linearLR)  (i tried countless settings and this worked out best for my new small (20k images) latest gen dataset)<br><br>
 
 
