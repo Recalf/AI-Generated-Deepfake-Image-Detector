@@ -1,10 +1,10 @@
 # AI-Generated-Deepfake-Image-Detector
-Detects if an image is Real or AI-Generated / DeepFake, using ConvNeXtV2_Base (pretrained on ImageNet) on 13 different datasets (400k images, with data augmentations and multiple epochs), And Continual Learning cycle to adapt on latest gen AI.
+Detects if an image is Real or AI-Generated / DeepFake, using ConvNeXtV2_Base (pretrained on ImageNet) on 13 different datasets (400k images, with data augmentations and multiple epochs), And Continual Learning cycle to adapt on latest gen AI.<br>
 It detects many SOTA generative models too like Nano Banana Pro, DALL-E3, Flux, Diffusion Models (SDXL, SD3...), MidjourneyV6...
-
+<br>
 I used 2 phases for training, 
-phase 1: training my model on 400k from 11 datasets, using AdamW(wd 0.02)/ LLRD(headlr: 2e-4, lr_decay:0.8)/cosine annealing with warmup(linearLR)
-phase 2: Continual Learning, using Rehearsal Buffer (Replay 1:1) and AdamW(wd 0.01)/ LLRD(headlr: 1e-4, lr_decay:0.8)/cosine annealing with warmup(linearLR)  (i tried countless settings and this worked out best for my new small (20k images) latest gen dataset)
+phase 1: training my model on 400k from 11 datasets, using AdamW(wd 0.02)/ LLRD(headlr: 2e-4, lr_decay:0.8)/cosine annealing with warmup(linearLR)<br>
+phase 2: Continual Learning, using Rehearsal Buffer (Replay 1:1) and AdamW(wd 0.01)/ LLRD(headlr: 1e-4, lr_decay:0.8)/cosine annealing with warmup(linearLR)  (i tried countless settings and this worked out best for my new small (20k images) latest gen dataset)<br>
 
 
 OOD Test Scores:
