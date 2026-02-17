@@ -1,6 +1,7 @@
 # AI-Generated-Deepfake-Image-Detector
-Detects if an image is Real or AI-Generated / DeepFake, using ConvNeXtV2_Base (pretrained on ImageNet) on 13 different datasets (400k images, with data augmentations and multiple epochs), And Continual Learning cycle to adapt on latest gen AI.<br>
-It detects many SOTA generative models too like Nano Banana Pro, DALL-E3, Flux, Diffusion Models (SDXL, SD3...), MidjourneyV6...
+Detects if an image is Real or AI-Generated / DeepFake, using ConvNeXtV2_Base (pretrained on ImageNet) on 13 different datasets (400k images), And Continual Learning cycle to adapt to latest gen AI.<br>
+I used techniques like LLRD, Cosine Annealing with warmup, Rehearsal Buffer... <br>
+The model detects many SOTA generative models like Nano Banana Pro, DALL-E3, Flux, Diffusion Models (SDXL, SD3...), MidjourneyV6...
 <br>
 I used 2 phases for training, <br><br>
 phase 1: 400k images from 11 datasets using LLRD(headlr: 2e-4, lr_decay:0.8)/AdamW(wd 0.02)/Cosine annealing with warmup(linearLR)<br><br>
