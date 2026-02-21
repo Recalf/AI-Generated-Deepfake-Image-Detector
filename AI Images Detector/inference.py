@@ -23,23 +23,22 @@ def load_model():
     model.to(device)
     model.eval()
     return model
-
 def safe_open_uploaded(uploaded_file): # validate file + reset cursor 
     try:
         uploaded_file.seek(0)
         img = Image.open(uploaded_file)
-        img.verify()
+        img.load()
         uploaded_file.seek(0)
         img = Image.open(uploaded_file).convert("RGB")
         return img
-    except (UnidentifiedImageError, OSError):
-        return None
+    except Exception as e:
+        return str(e)
 
 def safe_open_pasted(pil_img): # normalize paste image into rgb reliably
     try:
         return pil_img.convert("RGB")
-    except Exception:
-        return None
+    except Exception as e:
+        return str(e)
 
 model = load_model()
 transform = test_transforms()
@@ -51,9 +50,12 @@ st.write("Upload or paste an image in the left sidebar and the model will try to
 st.sidebar.header("Input")
 uploaded_file = st.sidebar.file_uploader(
     "Upload an image",
-    type=["jpg", "jpeg", "png"],
-    max_upload_size=MAX_SIZE_MB  
+    type=["jpg", "jpeg", "png", "webp", "bmp", "JPG", "JPEG", "PNG", "WEBP", "BMP"],
+    max_upload_size=MAX_SIZE_MB
 )
+if uploaded_file is not None:
+    st.sidebar.caption(f"Selected: {uploaded_file.name} ({uploaded_file.size/1024/1024:.2f} MB)")
+
 with st.sidebar:
     paste_result = pbutton("Paste Image")
 
@@ -67,10 +69,14 @@ if uploaded_file is not None: # uploaded image stats
     if uploaded_file.size > MAX_SIZE_BYTES:
         st.error(f"File too large. Maximum allowed size is {MAX_SIZE_MB}MB.")
         st.stop()
-    image = safe_open_uploaded(uploaded_file)
-    if image is None:
-        st.error("Invalid image file.")
+        
+    result = safe_open_uploaded(uploaded_file)
+    if isinstance(result, str):
+        st.error("Error 1: Could not read this image on this device/browser.")
+        st.info("Try a different JPG/PNG, or open the site in Chrome (not in-app browser).")
+        # st.caption(f"debug: {result}")  # for debugging
         st.stop()
+    image = result
 
 elif paste_result.image_data is not None:
     buffer = io.BytesIO()
@@ -78,14 +84,21 @@ elif paste_result.image_data is not None:
     if buffer.tell() > MAX_SIZE_BYTES:
         st.error(f"Pasted image too large. Maximum allowed size is {MAX_SIZE_MB}MB.")
         st.stop()
-    image = safe_open_pasted(paste_result.image_data)
-    if image is None:
-        st.error("Invalid pasted image.")
+        
+    result = safe_open_pasted(paste_result.image_data)
+    if isinstance(result, str):
+        st.error("Error 2: Could not read this image on this device/browser.")
+        st.info("Try a different JPG/PNG, or open the site in Chrome (not in-app browser).")
+        # st.caption(f"debug: {result}")  # for debugging
         st.stop()
+    image = result
 
 # safety
 if image is not None and (image.width * image.height > MAX_PIXELS):
-    st.error(f"Image resolution too large. Please upload <= {MAX_PIXELS} pixels.")
+    st.error(
+    f"Image too large ({image.width}×{image.height}). "
+    f"Maximum allowed is ~{MAX_PIXELS/1_000_000:.1f}MP."
+    )
     st.stop()
 
 # inference (with atomic rendering to avoid bugs)
