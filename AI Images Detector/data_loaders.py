@@ -35,7 +35,7 @@ def dataloaders(BATCH_SIZE = 30, NUM_WORKERS = 8):
 
     # TRAIN DATASETS: 
     # (ive lowered the samples in the big datasets to half, now we have a total around 400k training samples)
-    # First dataset: DDA (arxiv:2505.14359). 55k coco, + 55k ai (sd2 gen) similar image to each coco. (also this needs its own transforms it needs light augs...)
+    # First dataset: DDA (arxiv:2505.14359). 55k coco, + 55k ai (sd2 gen) similar image to each coco. (also this needs its own transforms, cuz it needs light augmentations...)
     dda_train = torchvision.datasets.ImageFolder(DDA_TRAIN, dda_transforms())
 
     # Second: Defactify (MS COCOAI). 14k real vs 40k ai, (SD21, SDXL, SD3, DALLE3, and MidjourneyV6). (hugging face: Rajarshi-Roy-research/Defactify_Image_Dataset)
@@ -137,3 +137,4 @@ def custom_test_dataloaders(path, BATCH_SIZE = 28, NUM_WORKERS = 8):
         persistent_workers=True,
     )
     return test_loader
+
