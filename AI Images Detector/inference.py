@@ -59,7 +59,7 @@ with st.sidebar:
 
 st.sidebar.header("Settings")
 threshold = st.sidebar.slider("Fake threshold", 0.0, 1.0, 0.50, 0.01)
-st.sidebar.caption("Higher = stricter (more fake confidence to label Fake)")
+st.sidebar.caption("Higher = Needs more confidence to classify as Fake")
 
 
 image = None
