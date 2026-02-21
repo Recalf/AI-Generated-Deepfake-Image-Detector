@@ -114,8 +114,8 @@ Gradient Clipping<br>
 - See `requirements.txt` for full list
 
 # Limitations
-The model may produce false positives on real images that differ significantly from the training distribution (e.g., unusual angles, heavy compression, screenshots, extreme cropping, or strong post-processing).<br>
-Performance may degrade on future generative models that were not represented in the training or continual learning phases.<br>
-Not designed to be robust against adversarial attacks or intentional evasion.<br>
-Not trained to detect partially AI-generated or hybrid images.<br>
-The system performs binary classification only (Real vs AI) and does not localize manipulated regions.
+- The model may produce false positives on real images that differ significantly from the training distribution (e.g., unusual angles, heavy compression, screenshots, extreme cropping, or strong post-processing).<br>
+- Performance may degrade on future generative models that were not represented in the training or continual learning phases.<br>
+- Not designed to be robust against adversarial attacks or intentional evasion.<br>
+- Not trained to detect partially AI-generated or hybrid images.<br>
+- The system performs binary classification only (Real vs AI) and does not localize manipulated regions.
