@@ -1,8 +1,3 @@
-
-
-import os
-import sys
-import time
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -10,7 +5,9 @@ from timm.optim import create_optimizer_v2
 import torchvision
 from torch.utils.data import DataLoader, ConcatDataset, Subset
 from torch.optim.lr_scheduler import LinearLR, CosineAnnealingLR, SequentialLR
-
+import os
+import sys
+import time
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from transforms import train_transforms, test_transforms, dda_transforms, continual_transforms
@@ -20,9 +17,8 @@ from test.test import my_test
 
 
 # This Continual Learning cycle to finetune the model on latest generative AI images to keep it up to date. 
-# we'll be using rehearsal buffer (replay), 1:8 worked soo much better than 1:2, 1:1, 1:4... in this case
+# we'll be using rehearsal buffer (replay), 1:8 worked soo much better than 1:2, 1:1, 1:4... in what i've tested.
 # so we'll do New dataset 20k samples + Replay 2.5K images (all old datasets stratfied) 
-
 
 # phase1 best checkpoint
 CKPT_PATH = "checkpoints/checkpoint_phase1.pth"
@@ -31,9 +27,7 @@ CKPT_PATH = "checkpoints/checkpoint_phase1.pth"
 REPLAY_P1 = 2500 
 REPLAY_SEED = 70
 
-
 # ====== PATHS 
-
 # New (20k ish)
 SUPER_GENAI = r"D:\Pytorch\data\GEN_IMAGE_DATA_V2\New-Gen\Super_GenAI_Dataset"
 JULIEN_TRAIN = r"D:\Pytorch\data\GEN_IMAGE_DATA_V2\New-Gen\midjourney-dalle-sd-nanobananapro-dataset\train"
@@ -64,13 +58,10 @@ PHASE1_PATHS = [
     STYLEGAN2_TRAIN, HASS_TRAIN, MONK_TRAIN
 ]
 
-
-
 def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-    train_loader, val_loader = Continual_dataloaders(0) # we'll be loading the train_loader later in the epochs loop, to load in each epoch different replay
-
+    train_loader, val_loader = Continual_dataloaders(0) # we'll be loading the train_loader in each epoch too, to load different replays each epoch.
+    
     model = build_model().to(device)
     ckpt = torch.load(CKPT_PATH, map_location=device)
     model.load_state_dict(ckpt["model"])
@@ -91,10 +82,10 @@ def main():
     warmup_steps = int(total_steps * 0.07) #  7% warmup
 
     warmup_scheduler = LinearLR(optimizer, start_factor=0.01, total_iters=warmup_steps) # the warmup makes our LRs start from *0.01, gradually increasing to the normal
-    cosine_scheduler = CosineAnnealingLR(optimizer, T_max=(total_steps - warmup_steps), eta_min=1e-7) # after the warmup we make our LRs gradually decrease like an arc (cosine) to lr=0. (scheduler batch steps for smoothness)
-    scheduler = SequentialLR(optimizer, schedulers=[warmup_scheduler, cosine_scheduler], milestones=[warmup_steps])
+    cosine_scheduler = CosineAnnealingLR(optimizer, T_max=(total_steps - warmup_steps), eta_min=1e-7) # after the warmup we make our LRs gradually decrease like an arc (cosine) to lr=1e-7 (our earliest layer with the LLRD is bigger than that) 
+    scheduler = SequentialLR(optimizer, schedulers=[warmup_scheduler, cosine_scheduler], milestones=[warmup_steps]) # (scheduler batch steps for smoothness)
 
-    if device.type == "cuda": # only use AMP on gpus with tensor cores (compute capability >= 7.0)
+    if device.type == "cuda": # only use AMP on gpus with tensor cores
         try:
             major, _ = torch.cuda.get_device_capability(device)
             use_amp = major >= 7 
@@ -201,7 +192,7 @@ def Continual_dataloaders(epoch, batch_size=28, num_workers=8):
         shuffle=True,
         num_workers=num_workers,
         pin_memory=pin_memory,
-        persistent_workers=False, # cuz we're recreating our data loader each epoch, it wont make sense if we do true
+        persistent_workers=False, # cuz we're recreating our data loader in each epoch, it wont make sense if we try to persist the threads
         prefetch_factor=1
     )
     val_loader = DataLoader(
@@ -212,7 +203,6 @@ def Continual_dataloaders(epoch, batch_size=28, num_workers=8):
         pin_memory=pin_memory,
         persistent_workers=False
     )
-
     return train_loader, val_loader
 
 def random_k_subset(ds, k, seed=101):
@@ -222,7 +212,6 @@ def random_k_subset(ds, k, seed=101):
     g = torch.Generator().manual_seed(seed)
     idx = torch.randperm(n, generator=g)[:k].tolist()
     return Subset(ds, idx)
-
 
 if __name__ == "__main__":
     main()
