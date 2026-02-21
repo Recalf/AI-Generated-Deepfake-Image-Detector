@@ -38,7 +38,7 @@ Training/Testing are optimized with **Automatic Mixed Precision** (AMP) using Te
 **Data Augmentations** include a probability for **Random Resampling** & **Random Jpeg Reencoding** to simulate real world images.<br>
 Real images consist primarily of natural photographs (COCO-style), human faces, and real-world web images from the listed datasets
 
-**Side Note:** The LLRD/Cosine... recipe is originally for fine-tuning ViTs (MAE and BEiT research papers), but it work well on ConvNeXt even though its a CNN architecture,<br>
+**Side Note:** The LLRD/Cosine... recipe is originally for fine-tuning ViTs (MAE and BEiT research papers), but it works well on ConvNeXt even though its a CNN architecture,<br>
 shortly, it’s because ConvNeXt was designed to act like ViTs while keeping CNN architecture efficiency.
 # Project Structure
 ├── train/<br>
