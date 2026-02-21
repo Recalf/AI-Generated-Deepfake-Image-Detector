@@ -73,7 +73,7 @@ Gradient Clipping<br>
 
 (out of numerous phase 2 hyperparameters/setups i experimented with, this worked out the best for my 20k dataset, especially with that 1:8 replay)
 # Datasets Used
-**Training Datasets [Phase 1 - ~400k images] (I halved the number of samples in some datasets):**
+**Training Datasets [Phase 1 - ~400k images] (I halved the number of samples in some large datasets):**
 - DDA-Training-Set (COCO + SD2 generated pairs)&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/Junwei-Xi/DDA-Training-Set*]
 - Defactify (MS COCOAI: SD21, SDXL, SD3, DALL-E3, MidjourneyV6)&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/Rajarshi-Roy-research/Defactify_Image_Dataset*]
 - VisCounter_COCOAI:&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/NasrinImp/COCO_AI*]
