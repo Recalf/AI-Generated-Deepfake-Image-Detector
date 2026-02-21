@@ -62,30 +62,21 @@ threshold = st.sidebar.slider("Fake threshold", 0.0, 1.0, 0.50, 0.01)
 st.sidebar.caption("Higher = stricter (more fake confidence to label Fake)")
 
 
-if "source" not in st.session_state: # choose input (last action wins)
-    st.session_state.source = None  # "upload" or "paste"
-
-if uploaded_file is not None:
-    st.session_state.source = "upload"
-if paste_result.image_data is not None:
-    st.session_state.source = "paste"
-
 image = None
-if st.session_state.source == "upload" and uploaded_file is not None:
+if uploaded_file is not None: # uploaded image stats
     if uploaded_file.size > MAX_SIZE_BYTES:
-        st.error("File too large. Maximum allowed size is 5MB.")
+        st.error(f"File too large. Maximum allowed size is {MAX_SIZE_MB}MB.")
         st.stop()
     image = safe_open_uploaded(uploaded_file)
     if image is None:
         st.error("Invalid image file.")
         st.stop()
 
-elif st.session_state.source == "paste" and paste_result.image_data is not None:
+elif paste_result.image_data is not None:
     buffer = io.BytesIO()
     paste_result.image_data.save(buffer, format="PNG")
-    size = buffer.tell()
-    if size > MAX_SIZE_BYTES:
-        st.error("Pasted image too large. Maximum allowed size is 5MB.")
+    if buffer.tell() > MAX_SIZE_BYTES:
+        st.error(f"Pasted image too large. Maximum allowed size is {MAX_SIZE_MB}MB.")
         st.stop()
     image = safe_open_pasted(paste_result.image_data)
     if image is None:
@@ -94,7 +85,7 @@ elif st.session_state.source == "paste" and paste_result.image_data is not None:
 
 # safety
 if image is not None and (image.width * image.height > MAX_PIXELS):
-    st.error("Image resolution too large. Please upload <= 4096x4096.")
+    st.error(f"Image resolution too large. Please upload <= {MAX_PIXELS} pixels.")
     st.stop()
 
 # inference (with atomic rendering to avoid bugs)
@@ -111,7 +102,7 @@ else:
     with result_box:
         preview = image.copy()
         preview.thumbnail((720, 420))
-        st.image(preview, caption="Input Image", width="stretch")
+        st.image(preview, caption="Input Image")
 
         img_tensor = transform(image).unsqueeze(0).to(device)
 
