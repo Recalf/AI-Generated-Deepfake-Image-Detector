@@ -16,7 +16,6 @@ def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     train_loader, val_loader, test_loader = dataloaders()
     model = build_model().to(device)
-
     loss = nn.CrossEntropyLoss(label_smoothing=0.05)
 
     # we'll be using LLRD + AdamW + wd 0.02 (lower wd cuz we're finetuning); a famous combination backed by research papers for ViTs (compatible with ConvNeXt)
@@ -37,10 +36,8 @@ def main():
 
     warmup_scheduler = LinearLR(optimizer, start_factor=1e-2, total_iters=warmup_steps) # the warmup makes our LRs start from *0.01, gradually increasing to the normal
     cosine_scheduler = CosineAnnealingLR(optimizer, T_max=(total_steps - warmup_steps), eta_min=0) # after the warmup we make our LRs gradually decrease like an arc (cosine)
-
     scheduler = SequentialLR(optimizer, schedulers=[warmup_scheduler, cosine_scheduler], milestones=[warmup_steps])
 
-    
     if device.type == "cuda": # only use AMP on gpus with tensor cores (compute capability >= 7.0)
         try:
             major, _ = torch.cuda.get_device_capability(device)
@@ -74,3 +71,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
