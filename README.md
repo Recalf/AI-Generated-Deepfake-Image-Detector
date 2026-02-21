@@ -30,7 +30,7 @@ EvalGen (SOTA generative models): **90.40% fake detection rate**
 Training follows techniques from deep learning research literature, such as:<br>
 Layer-wise Learning Rate Decay **(LLRD)** to protect early layers during fine-tuning,<br>
 **Cosine Annealing** with a 5-7% **Warmup** (LinearLR),<br>
-**Rehearsal Buffer** (stratified datasets) for **Continual Learning**,<br>
+**Rehearsal Buffer** (stratified datasets) for the **Continual Learning** phase,<br>
 Gradient Clipping, Label Smoothing...
 
 Training/Testing are optimized with **Automatic Mixed Precision** (AMP) using Tensor Cores and other efficient **CUDA optimizations**<br>
