@@ -91,7 +91,7 @@ Gradient Clipping<br>
 - midjourney-dalle-sd-nanobananapro-dataset&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/julienlucas/midjourney-dalle-sd-nanobananapro-dataset?utm_source=chatgpt.com*]
 
 # Usage/How to Run
-**Model Checkpoint: (if you haven’t downloaded it yet)**
+**Model Checkpoint: (Checkpoints are too large for GitHub)**
 - Download my checkpoint ("checkpoint_phase2") from my [*huggingface.co/xRayon/convnext-ai-images-detector/tree/main/AI%20Images%20Detector/checkpoints*]<br>
 - Place it inside my checkpoints/ folder.
 
