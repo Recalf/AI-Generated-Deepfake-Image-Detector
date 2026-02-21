@@ -29,16 +29,16 @@ def main():
         filter_bias_and_bn=True  # no weight decay on normalizations and bias (it degrades performance (pytorch documentation and in some researches))
     )
 
-    # LinearLR (5% of total for warmup, batch steps (cuz smoother)) + Cosine Annealing scheduler (batch steps, no restarts)
+    # LinearLR (5% of total for warmup, batch steps (smoother)) + Cosine Annealing scheduler (batch steps, no restarts)
     steps_per_epoch = len(train_loader) 
     total_steps = steps_per_epoch * num_epochs
     warmup_steps = int(total_steps * 0.05) # 5% warmup
 
     warmup_scheduler = LinearLR(optimizer, start_factor=1e-2, total_iters=warmup_steps) # the warmup makes our LRs start from *0.01, gradually increasing to the normal
-    cosine_scheduler = CosineAnnealingLR(optimizer, T_max=(total_steps - warmup_steps), eta_min=0) # after the warmup we make our LRs gradually decrease like an arc (cosine)
+    cosine_scheduler = CosineAnnealingLR(optimizer, T_max=(total_steps - warmup_steps), eta_min=0) # after the warmup we make our LRs gradually decrease like an arc (cosine) to 0.
     scheduler = SequentialLR(optimizer, schedulers=[warmup_scheduler, cosine_scheduler], milestones=[warmup_steps])
 
-    if device.type == "cuda": # only use AMP on gpus with tensor cores (compute capability >= 7.0)
+    if device.type == "cuda": # only use AMP on gpus with tensor cores
         try:
             major, _ = torch.cuda.get_device_capability(device)
             use_amp = major >= 7 
@@ -71,4 +71,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
