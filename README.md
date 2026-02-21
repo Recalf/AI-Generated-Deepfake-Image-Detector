@@ -34,7 +34,8 @@ Gradient Clipping, Label Smoothing...
 
 Training/Testing are optimized with **Automatic Mixed Precision** (AMP) using Tensor Cores and other efficient **CUDA optimizations**<br>
 (If run on a CPU, it falls back to non GPU; if the GPU doesn't support AMP, it falls back to FP32)<br>
-**Data Augmentations** include a probability for **Random Resampling** & **Random Jpeg Reencoding** to simulate real world images.
+**Data Augmentations** include a probability for **Random Resampling** & **Random Jpeg Reencoding** to simulate real world images.<br>
+Real images consist primarily of natural photographs (COCO-style), human faces, and real-world web images from the listed datasets
 
 **Side Note:** The LLRD/Cosine... recipe is originally for fine-tuning ViTs (MAE and BEiT research papers), but it work well on ConvNeXt even though its a CNN architecture,<br>
 shortly, it’s because ConvNeXt was designed to act like ViTs while keeping CNN architecture efficiency.
@@ -74,8 +75,6 @@ Gradient Clipping<br>
 
 (out of numerous phase 2 hyperparameters/setups i experimented with, this worked out the best for my 20k dataset, especially with that 1:8 replay)
 # Datasets Used
-(Real images consist primarily of natural photographs (COCO-style), human faces, and real-world web images from the listed datasets)<br>
-
 **Training Datasets [Phase 1 - ~400k images] (I halved the number of samples in some large datasets):**
 - DDA-Training-Set (COCO + SD2 generated pairs)&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/Junwei-Xi/DDA-Training-Set*]
 - Defactify (MS COCOAI: SD21, SDXL, SD3, DALL-E3, MidjourneyV6)&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/Rajarshi-Roy-research/Defactify_Image_Dataset*]
