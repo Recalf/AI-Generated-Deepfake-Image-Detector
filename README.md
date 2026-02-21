@@ -74,21 +74,21 @@ Gradient Clipping<br>
 (out of numerous phase 2 hyperparameters/setups i experimented with, this worked out the best for my 20k dataset, especially with that 1:8 replay)
 # Datasets Used
 **Training Datasets [Phase 1 - ~400k images] (I halved the number of samples in some datasets):**
-- DDA-Training-Set (COCO + SD2 generated pairs)   [*huggingface.co/datasets/Junwei-Xi/DDA-Training-Set*]
-- Defactify (MS COCOAI: SD21, SDXL, SD3, DALL-E3, MidjourneyV6)   [*huggingface.co/datasets/Rajarshi-Roy-research/Defactify_Image_Dataset*]
-- VisCounter_COCOAI:   [*huggingface.co/datasets/NasrinImp/COCO_AI*]
-- genimage_tiny (Midjourney, BigGAN, VQDM, SDv5, Wukong, ADM, GLIDE)   [*kaggle.com/datasets/yangsangtai/tiny-genimage*]
-- art_artai   [*kaggle.com/datasets/cashbowman/ai-generated-images-vs-real-images*]
-- Midjourney_small   [*kaggle.com/datasets/mariammarioma/midjourney-imagenet-real-vs-synth*]
-- DF40 (Deepfake)   [*github.com/YZY-stack/DF40*]
-- Gravex200k   [*kaggle.com/datasets/muhammadbilal6305/200k-real-vs-ai-visuals-by-mbilal*]
-- StyleGan2   [*kaggle.com/datasets/kshitizbhargava/deepfake-face-images*]
-- human_faces_hass   [*kaggle.com/datasets/hassnainzaidi/human-faces-data-set* ]
-- dfk_oldmonk   [*kaggle.com/datasets/saurabhbagchi/deepfake-image-detection*]
+- DDA-Training-Set (COCO + SD2 generated pairs)&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/Junwei-Xi/DDA-Training-Set*]
+- Defactify (MS COCOAI: SD21, SDXL, SD3, DALL-E3, MidjourneyV6)&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/Rajarshi-Roy-research/Defactify_Image_Dataset*]
+- VisCounter_COCOAI:&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/NasrinImp/COCO_AI*]
+- genimage_tiny (Midjourney, BigGAN, VQDM, SDv5, Wukong, ADM, GLIDE)&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/yangsangtai/tiny-genimage*]
+- art_artai&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/cashbowman/ai-generated-images-vs-real-images*]
+- Midjourney_small&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/mariammarioma/midjourney-imagenet-real-vs-synth*]
+- DF40 (Deepfake)&nbsp;&nbsp;&nbsp;[*github.com/YZY-stack/DF40*]
+- Gravex200k&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/muhammadbilal6305/200k-real-vs-ai-visuals-by-mbilal*]
+- StyleGan2&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/kshitizbhargava/deepfake-face-images*]
+- human_faces_hass&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/hassnainzaidi/human-faces-data-set* ]
+- dfk_oldmonk&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/saurabhbagchi/deepfake-image-detection*]
 
 **Phase 2 Continual Learning [~20k new images]:**
-- Super_GenAI_Dataset   [*kaggle.com/datasets/hiddenplant/sut-project?select=Super_GenAI_Dataset*]
-- midjourney-dalle-sd-nanobananapro-dataset   [*huggingface.co/datasets/julienlucas/midjourney-dalle-sd-nanobananapro-dataset?utm_source=chatgpt.com*]
+- Super_GenAI_Dataset&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/hiddenplant/sut-project?select=Super_GenAI_Dataset*]
+- midjourney-dalle-sd-nanobananapro-dataset&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/julienlucas/midjourney-dalle-sd-nanobananapro-dataset?utm_source=chatgpt.com*]
 
 # Usage/How to Run
 **Model Checkpoint: (if you haven’t downloaded it yet)**
