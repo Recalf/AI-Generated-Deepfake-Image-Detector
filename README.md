@@ -53,7 +53,7 @@ shortly, it’s because ConvNeXt was designed to act like ViTs while keeping CNN
 ├── engine.py # Training/testing loops<br>
 └── transforms.py # Data augmentation pipelines<br>
 
-# Training Hyperparameters:
+# Training Setup:
 **Phase 1:** <br>
 400k images from 11 different datasets, 8 epochs with batch-size 30 using:<br>
 AdamW(wd 0.02),<br>
