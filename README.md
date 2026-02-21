@@ -120,4 +120,4 @@ See `data_loaders.py` for the train/val/test splits and sizes.
 - Not designed to be robust against adversarial attacks or intentional evasion.
 - Performance may degrade on future generative models that were not represented in the training or continual learning phases.
 
-If you have any feedback or if you notice something that could be improved, I’d genuinely appreciate it.
+If you have any feedback or notice anything that could be improved, I’d genuinely appreciate it.
