@@ -119,8 +119,6 @@ def dataloaders(BATCH_SIZE = 30, NUM_WORKERS = 8):
         pin_memory=pin_memory, 
         persistent_workers=True,
     )
-
-
     return train_loader, val_loader, test_loader
 
 
@@ -137,4 +135,5 @@ def custom_test_dataloaders(path, BATCH_SIZE = 28, NUM_WORKERS = 8):
         persistent_workers=True,
     )
     return test_loader
+
 
