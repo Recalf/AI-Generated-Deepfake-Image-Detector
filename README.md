@@ -115,8 +115,9 @@ See `data_loaders.py` for the train/val/test splits and sizes.
 - See `requirements.txt` for full list
 
 # Limitations
-- The model may produce false positives on real images that differ significantly from the training distribution (e.g., unusual angles, heavy compression, screenshots, extreme cropping, or strong post-processing).<br>
-- Performance may degrade on future generative models that were not represented in the training or continual learning phases.<br>
-- Not designed to be robust against adversarial attacks or intentional evasion.<br>
-- Not trained to detect partially AI-generated or hybrid images.<br>
-- The system performs binary classification only (Real vs AI) and does not localize manipulated regions.
+- Not trained to detect partially AI-generated or hybrid images.
+- The model uses a CNN architecture rather than a large ViT, and was trained on ~400k images (a medium-sized dataset). While it performs well, it is not designed to reach SOTA-level accuracy
+- Not designed to be robust against adversarial attacks or intentional evasion.
+- Performance may degrade on future generative models that were not represented in the training or continual learning phases.
+
+If you have any feedback or if you notice something that could be improved, I’d genuinely appreciate it.
