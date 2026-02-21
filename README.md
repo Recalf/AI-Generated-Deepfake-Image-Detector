@@ -77,7 +77,7 @@ Gradient Clipping<br>
 (out of numerous phase 2 hyperparameters/setups i experimented with, this worked out the best for my 20k dataset, especially with that 1:8 replay)
 # Datasets Used (0:real  1:fake)
 **Phase 1 [~400k images] (I halved the number of samples in some large datasets):**
-- DDA-Training-Set (COCO + SD2 generated pairs)&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/Junwei-Xi/DDA-Training-Set*]
+- DDA-Training-Set (arxiv:2505.14359, COCO + SD2 generated pairs) &nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/Junwei-Xi/DDA-Training-Set*]
 - Defactify (MS COCOAI: SD21, SDXL, SD3, DALL-E3, MidjourneyV6)&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/Rajarshi-Roy-research/Defactify_Image_Dataset*]
 - VisCounter_COCOAI:&nbsp;&nbsp;&nbsp;[*huggingface.co/datasets/NasrinImp/COCO_AI*]
 - genimage_tiny (Midjourney, BigGAN, VQDM, SDv5, Wukong, ADM, GLIDE)&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/yangsangtai/tiny-genimage*]
@@ -88,6 +88,7 @@ Gradient Clipping<br>
 - StyleGan2&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/kshitizbhargava/deepfake-face-images*]
 - human_faces_hass&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/hassnainzaidi/human-faces-data-set* ]
 - dfk_oldmonk&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/saurabhbagchi/deepfake-image-detection*]
+See `data_loaders.py` for the train/val/test splits and sizes.
 
 **Phase 2 Continual Learning [~20k new images]:**
 - Super_GenAI_Dataset&nbsp;&nbsp;&nbsp;[*kaggle.com/datasets/hiddenplant/sut-project?select=Super_GenAI_Dataset*]
