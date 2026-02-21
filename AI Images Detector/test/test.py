@@ -11,18 +11,14 @@ from engine import test, test_1_class
 
 def main():
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
     model = build_model()
     ckpt = torch.load("checkpoints/checkpoint_phase2.pth", map_location=device)
-
     model.load_state_dict(ckpt["model"])
     model.to(device)
     model.eval()
-
-
-    # EVALGEN test data && this person doesnt exist. 
+    
+    # EVALGEN test data 
     my_test(model, device)
-
 
     # custom test data
     #path = r'C:\Users\touto\Desktop\test\CelebDF_V2\Celeb_V2\Test'
@@ -31,19 +27,13 @@ def main():
 
 def my_test(model, device): # shortcut test for my EvalGen + ThisPersonDoesNotExist 
     evalgen_loader = custom_test_dataloaders(path=r"D:\Pytorch\data\GEN_IMAGE_DATA_V2\TEST\GenEval")
-    #prsn_doesnt_exist_loader = custom_test_dataloaders(path=r'D:\Pytorch\data\GEN_IMAGE_DATA_V2\TEST\ThisPersonDoesNotExist')
-
     avg_conf, pct_fake = test_1_class(model, evalgen_loader, device)
     print(f"EvalGen (1-class) | avg_fake_conf={avg_conf:.4f} | %pred_fake={pct_fake:.2f}%")
-
-    #avg_conf, pct_fake = test_1_class(model, prsn_doesnt_exist_loader, device)
-    #print(f"ThisPersonDoesNotExist (1-class) | avg_fake_conf={avg_conf:.4f} | %pred_fake={pct_fake:.2f}%")
 
 
 def custom_test(path, model, loader, device):
     num_unique = len(loader.dataset.classes)
     print("classes:", num_unique)
-
     if num_unique == 2: # 2 classes test:
         loss = nn.CrossEntropyLoss()
         test_loss, test_f1, test_auc = test(model, loader, loss, device, threshold=0.5)  # fake threshold, lower = classifies more as fake
