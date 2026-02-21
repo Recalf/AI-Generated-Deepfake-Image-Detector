@@ -63,16 +63,16 @@ AdamW(wd 0.02),<br>
 LLRD(headlr: 2e-4, lr_decay:0.8, filtering Bias/BN on),<br>
 Cosine Annealing (eta_min 0) with 5% Warmup (linearLR, lr * 0.01),<br>
 Label Smoothing (0.05),<br>
-Gradient Clipping
+Gradient Clipping (max norm = 1.0)
 
 **Phase 2:** <br>
 Continual Learning (i used 20k images), 5 epochs with batch-size 28 using:<br>
 Rehearsal Buffer (stratified replay 1:8),<br>
 AdamW(wd 0.02),<br>
 LLRD(headlr: 7.5e-5, lr_decay:0.85, filtering Bias/BN on),<br>
-Cosine Annealing (eta_min 1e-7) with 7% Warmup (linearLR, lr * 0.01),<br>
+Cosine Annealing (eta_min 1e-7, our earliest layer with the LLRD is bigger than that) with 7% Warmup (linearLR, lr * 0.01),<br>
 Label Smoothing (0.05),<br>
-Gradient Clipping<br>
+Gradient Clipping (max norm = 1.0)<br>
 
 (out of numerous phase 2 hyperparameters/setups i experimented with, this worked out the best for my 20k dataset, especially with that 1:8 replay)
 # Datasets Used (0:real  1:fake)
