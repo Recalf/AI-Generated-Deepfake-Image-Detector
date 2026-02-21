@@ -19,13 +19,11 @@ def train(model, train_loader, optimizer, loss, scaler, device, scheduler=None):
     model.train()
     running_loss = 0.0
     use_cuda = device.type == "cuda"
-    use_amp = _supports_tensor_cores(device)  # only use AMP on gpus with tensor cores
+    use_amp = _supports_tensor_cores(device)  # only uses AMP on gpus with tensor cores
 
     for (images, labels) in (train_loader):
         images, labels = images.to(device, non_blocking=use_cuda), labels.to(device, non_blocking=use_cuda)
-        
-        optimizer.zero_grad(set_to_none=True) # set_to_none is better and faster, it sets grad tensors to none instead of zero when emptying
-
+        optimizer.zero_grad(set_to_none=True) # set_to_none is better and faster, it sets grad tensors to none instead of zeros when emptying
         if use_amp:
             with torch.amp.autocast(device_type=device.type): # mixed precision training (AMP)
                 outputs = model(images)
@@ -36,10 +34,8 @@ def train(model, train_loader, optimizer, loss, scaler, device, scheduler=None):
         
         if scaler is not None:
             scaler.scale(batch_loss).backward()
-
             scaler.unscale_(optimizer) # gradient clipping
             clip_grad_norm_(model.parameters(), 1.0) 
-            
             scaler.step(optimizer)
             scaler.update()
 
@@ -50,10 +46,8 @@ def train(model, train_loader, optimizer, loss, scaler, device, scheduler=None):
         
         if scheduler: # scheduler steps per-batch, smoother than per-epoch (for our cosine annealing & linearLr)
             scheduler.step()
-
         running_loss += batch_loss.item() * images.size(0) # multiplied by batch size to get per-sample average (robust against last batch size variance)
         
-
     train_loss = running_loss / len(train_loader.dataset)
     return train_loss
 
@@ -102,14 +96,12 @@ def test_1_class(model, loader, device, threshold=0.5): # accuracy with confiden
     with torch.no_grad():
         for images, _ in loader:
             images = images.to(device, non_blocking=use_cuda)
-            
             if use_amp:
                 with torch.amp.autocast(device_type=device.type):
                     outputs = model(images)
             else:
                 outputs = model(images)
             probs = torch.softmax(outputs, dim=1)
-
             fake_probs = probs[:, 1]
             scores.extend(fake_probs.cpu().numpy())
 
@@ -118,3 +110,4 @@ def test_1_class(model, loader, device, threshold=0.5): # accuracy with confiden
     avg_confidence = np.mean(scores)
     percent_fake = (scores > threshold).mean() * 100
     return avg_confidence, percent_fake
+
