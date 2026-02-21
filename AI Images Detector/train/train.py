@@ -19,7 +19,7 @@ def main():
 
     loss = nn.CrossEntropyLoss(label_smoothing=0.05)
 
-    # we'll be using LLRD + AdamW + wd 0.02 (lower wd cuz we're finetuning); a famous combination backed by research papers for ViTs (compatible with ConvNeXt, cuz it acts like ViTs in some areas (but still a CNN architecture)...)
+    # we'll be using LLRD + AdamW + wd 0.02 (lower wd cuz we're finetuning); a famous combination backed by research papers for ViTs (compatible with ConvNeXt)
     num_epochs = 8
     optimizer = create_optimizer_v2(
         model,
@@ -47,15 +47,13 @@ def main():
             use_amp = major >= 7 
         except:
             use_amp = False
-
         scaler = torch.amp.GradScaler("cuda") if use_amp else None
         torch.backends.cudnn.benchmark = True
     else:
         scaler = None
-
+        
     for epoch in range(num_epochs):
         train_loss = train(model, train_loader, optimizer, loss, scaler, device, scheduler=scheduler)
-        
         # save checkpoint
         torch.save({
             "epoch": epoch+1, 
@@ -69,13 +67,10 @@ def main():
         val_loss, val_f1, val_auc = test(model, val_loader, loss, device) 
         print(f"Epoch [{epoch+1}/{num_epochs}] Train Loss: {train_loss:.4f}| Val Loss: {val_loss:.4f}, Val F1: {val_f1:.4f}, Val AUC: {val_auc:.4f}")
         print(time.strftime("%H:%M:%S"))
-
-
-
+        
     # model on test split
     test_loss, test_f1, test_auc = test(model, test_loader, loss, device)
     print(f"Final Test: Loss: {test_loss:.4f}, F1: {test_f1:.4f}, AUC: {test_auc:.4f}")
-
 
 if __name__ == "__main__":
     main()
