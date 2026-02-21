@@ -101,7 +101,7 @@ Gradient Clipping<br>
 **Inference (Web Interface):** 
 - Open CMD in the project directory (where inference.py and requirements.txt are located).
 - Install the requirements: pip install -r requirements.txt 
-- Run: streamlit run inference.py
+- Run: streamlit run inference.py<br>
 (The inference interface allows threshold adjustment to control strictness)
 
 # Requirements
