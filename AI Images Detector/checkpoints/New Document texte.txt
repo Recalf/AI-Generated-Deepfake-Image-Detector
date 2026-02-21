@@ -1,0 +1,1 @@
+Checkpoints are on my Huggingface Repo: https://huggingface.co/xRayon/convnext-ai-images-detector/tree/main/AI%20Images%20Detector/checkpoints
