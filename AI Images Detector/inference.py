@@ -8,7 +8,7 @@ from model.convnext import build_model
 from transforms import test_transforms
 from streamlit_paste_button import paste_image_button as pbutton
 
-MAX_SIZE_MB = 5
+MAX_SIZE_MB = 20
 MAX_SIZE_BYTES = MAX_SIZE_MB * 1024 * 1024
 MAX_PIXELS = 4096 * 4096
 
