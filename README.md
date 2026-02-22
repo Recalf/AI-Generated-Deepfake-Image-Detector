@@ -109,7 +109,7 @@ See `data_loaders.py` for the train/val/test splits and sizes.
 - Build Image:
 `docker build -t ai-image-detector .`
 - Run Container:
- `docker run -p 8501:8501 ai-image-detector`
+ `docker run -p 8501:8501 ai-image-detector` -v /local/path/checkpoints:/app/checkpoints ai-image-detector
 
 
 # Requirements

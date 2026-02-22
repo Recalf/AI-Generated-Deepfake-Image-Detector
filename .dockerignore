@@ -1,6 +1,6 @@
-.git
-.gitignore
+AI Images Detector/train
+AI Images Detector/test
+AI Images Detector/engine.py
+AI Images Detector/data_loaders.py
+AI Images Detector/checkpoints/*.pth
 __pycache__
-*.py[cod]
-.venv
-venv
