@@ -104,10 +104,13 @@ See `data_loaders.py` for the train/val/test splits and sizes.
 
 (The inference interface allows threshold adjustment to control strictness)
 
-**Docker:**  
-- Put `checkpoint_phase2.pth` in `AI Images Detector/checkpoints/` (see above).
-- From repo root: `docker compose up --build` then open http://localhost:8501  
-- Or: `docker build -t ai-image-detector .` then `docker run -p 8501:8501 ai-image-detector`
+**Docker (containerized run):**
+- Make sure you have `checkpoint_phase2.pth`in your checkpoints/
+- Build Image:
+`docker build -t ai-image-detector .`
+- Run Container:
+ `docker run -p 8501:8501 ai-image-detector`
+
 
 # Requirements
 - Python 3.x
