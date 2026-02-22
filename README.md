@@ -104,7 +104,7 @@ See `data_loaders.py` for the train/val/test splits and sizes.
 
 (The inference interface allows threshold adjustment to control strictness)
 
-**Docker (containerized run):**
+**Container (Docker):**
 - Make sure you have `checkpoint_phase2.pth`in your checkpoints/
 - Build Image:
 `docker build -t ai-image-detector .`
