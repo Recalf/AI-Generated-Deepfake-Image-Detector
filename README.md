@@ -1,7 +1,7 @@
 ![Project Thumbnail](milad-fakurian-sin5WZzF1U0-unsplash.jpg)
 
-# Live Demo Video:
-<video src="https://drive.google.com/file/d/1IhzPm4rtJI3Ok8STFGe_VkJ9gYpvpdsT" controls></video>
+# 🎬 4-Minute Live Demo
+[Watch the demo video](https://drive.google.com/file/d/1IhzPm4rtJI3Ok8STFGe_VkJ9gYpvpdsT)
 
 # Summary
 This project detects whether an image is real or AI-Generated / AI-Deepfake using **ConvNeXtV2-Base (256×256)**, pretrained on ImageNet-1K.<br>
