@@ -1,7 +1,8 @@
 ![Project Thumbnail](milad-fakurian-sin5WZzF1U0-unsplash.jpg)
 
 # Live Demo Video:
-https://drive.google.com/file/d/1IhzPm4rtJI3Ok8STFGe_VkJ9gYpvpdsT/view?usp=sharing
+<video src="https://drive.google.com/file/d/1IhzPm4rtJI3Ok8STFGe_VkJ9gYpvpdsT/view?usp=sharing" controls></video>
+
 # Summary
 This project detects whether an image is real or AI-Generated / AI-Deepfake using **ConvNeXtV2-Base (256×256)**, pretrained on ImageNet-1K.<br>
 The model was trained in two phases: First on ~400,000 images (ai vs real) to build a strong foundation, then with Continual Learning phase to adapt to the latest generative AI models.
