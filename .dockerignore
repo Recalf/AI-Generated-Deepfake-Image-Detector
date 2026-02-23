@@ -3,4 +3,6 @@ AI Images Detector/test
 AI Images Detector/engine.py
 AI Images Detector/data_loaders.py
 AI Images Detector/checkpoints/*.pth
-__pycache__
+__pycache__/
+*.pyc
+.git/
