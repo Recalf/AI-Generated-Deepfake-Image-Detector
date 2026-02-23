@@ -1,20 +1,4 @@
----
-license: mit
-language:
-- en
-metrics:
-- accuracy
-- f1
-- roc_auc
-base_model:
-- timm/convnextv2_base.fcmae_ft_in1k
-pipeline_tag: image-classification
-tags:
-- ai
-- detector
-- deepfake
----
-
+![Project Thumbnail](milad-fakurian-sin5WZzF1U0-unsplash.jpg)
 
 # Summary
 This project detects whether an image is real or AI-Generated / AI-Deepfake using **ConvNeXtV2-Base (256×256)**, pretrained on ImageNet-1K.<br>
