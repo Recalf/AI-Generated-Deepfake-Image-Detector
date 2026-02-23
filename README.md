@@ -110,7 +110,7 @@ See `data_loaders.py` for the train/val/test splits and sizes.
 **Docker Containerization (Optional):**
 - Make sure you have `checkpoint_phase2.pth`in your `AI Images Detector/checkpoints/`
 - Build Image:
-`docker image build -t ai-image-detector .` (make sure your current dir in your terminal is my repo root)
+`docker image build -t ai-image-detector .`, make sure you're in the repo root (where the Dockerfile is)
 - Run Container :
  `docker container run -p 8501:8501 -v "PATH_HERE:/app/checkpoints" ai-image-detector`, replace PATH_HERE with the checkpoint's full path, we'll be mounting the checkpoint instead of building it with the image, faster and better. 
 
