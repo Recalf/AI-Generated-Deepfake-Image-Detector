@@ -1,4 +1,3 @@
-# Build from repo root: docker build -t ai-image-detector .
 FROM python:3.13-slim
 
 WORKDIR /app
